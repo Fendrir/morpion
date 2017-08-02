@@ -156,7 +156,7 @@ $("#texte-player-2").html("bienvenue "+ joueur2);
 
 var joueur = 1;
 
-$(".case").on("click",function(){
+$(".case").on("click",function donneImage(){
 		if(joueur===1 ){
 			$(this).html(nukeBomb);
 			joueur=2;
@@ -201,7 +201,7 @@ $(".case").on("click",function(){
               window.alert('Partie terminée.\nRechargez la page pour rejouer.') ;
               return ;
           }
-          if (document.images[n].src.search('fond-blanc') != -1)
+          if (document.images[n].src.search('fond-blanc.jpg') != -1)
           {
 
               document.images[n].src = donneImage(coups).src ;
