@@ -82,8 +82,7 @@ $('#player_2').change(function(){
 // -------------------------- condition positionning tour par tour -------------------
 
 
-      // Compteur de coups
-      var coups = 0 ;
+
 
       // Images joueur 1 joueur 2 et fond
 
@@ -98,75 +97,64 @@ var joueur = 1;
 
 $(".case").on("click",function donneImage(){
 		if(joueur===1 ){
-			$(this).html(nukeBomb);
-			joueur=2;
-		}else{
+
+      if ($(this).html()==""){
+      $(this).html(nukeBomb);
+      joueur=2;
+
+      }else{
+
+        alert("Case pleine");
+
+      }
+
+		}else if (joueur===2){
+
+      if ($(this).html()==""){
+
 			$(this).html(bactBomb);
 			joueur=1;
+
+      }else{
+
+        alert("case pleine");
+
+      }
 		}
 });
 
-      // function donneImage(i)
-      // {
-      //     if (i%2)
-      //         return $(this).html(nukeBomb) ;
-      //     else
-      //         return $(this).html(bactBomb) ;
-      // }
+
+function verifier(a, b, c){
+
+    if (a==b && a==c){
+
+      if (a==nukeBomb){
+      alert( 'Le joueur 1 gagne et atomise le joueur 2 !') ;
+       
+    }else if (a==bactBomb){
+
+      alert('Le joueur 2 gagne et désintègre le joueur 1');
+
+    }
+  }
+
+};
 
 
 
-          // if (   document.images[a].src == document.images[b].src
-          //     && document.images[b].src == document.images[c].src
-          //     && document.images[c].src != fondBlanc.src)
-          // {
-          //     window.alert ('Nous avons un gagnant !') ;
-          //     // return true ;
-          // }
 
-      //     return false ;
-      // }
-
-
-
-      function gagnant()
+      $(".case").on("click",function gagnant()
       {
-          return verifier($("#case1")=(0), $("#case2")=(1), $("#case3")=(2))
-              || verifier($("#case4")=(3), $("#case5")=(4), $("#case6")=(5))
-              || verifier($("#case7")=(6), $("#case8")=(7), $("#case9")=(8))
-              || verifier($("#case1")=(0), $("#case4")=(3), $("#case7")=(6))
-              || verifier($("#case2")=(1), $("#case5")=(4), $("#case8")=(7))
-              || verifier($("#case3")=(2), $("#case6")=(5), $("#case9")=(8))
-              || verifier($("#case1")=(0), $("#case5")=(4), $("#case9")=(8))
-              || verifier($("#case2")=(1), $("#case5")=(4), $("#case7")=(6)) ;
+          return verifier($("#case1").html(), $("#case2").html(), $("#case3").html())
+              || verifier($("#case4").html(), $("#case5").html(), $("#case6").html())
+              || verifier($("#case7").html(), $("#case8").html(), $("#case9").html())
 
-      }
+              || verifier($("#case1").html(), $("#case4").html(), $("#case7").html())
+              || verifier($("#case2").html(), $("#case5").html(), $("#case8").html())
+              || verifier($("#case3").html(), $("#case6").html(), $("#case9").html())
 
-      function joue(n)
-      {
-          if (coups > 8)
-          {
-              window.alert('Partie terminée.\nRechargez la page pour rejouer.') ;
-              return ;
-          }
-          if (document.images[n].src.search('images/fond-blanc.jpg') != -1)
-          {
+              || verifier($("#case1").html(), $("#case5").html(), $("#case9").html())
+              || verifier($("#case3").html(), $("#case5").html(), $("#case7").html()) ;
 
-              document.images[n].src = donneImage(coups).src ;
+       });
 
-              if (gagnant())
-              {
-
-                  coups = 9 ;
-              }
-              else
-              {
-
-                  coups++ ;
-              }
-          }
-          else
-          {
-              window.alert ('Position déjà jouée') ;
-          }
-      }
